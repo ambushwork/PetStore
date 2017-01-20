@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="BarkBank/src/java"/>
+	<classpathentry kind="src" path="Hello/src"/>
+	<classpathentry kind="src" path="Yaps/src/java"/>
+	<classpathentry kind="src" path="Yaps/test/src"/>
+	<classpathentry kind="lib" path="Yaps/test12.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/luyi/Desktop/tempEverything/jars/dom4j.jar"/>
+	<classpathentry kind="lib" path="C:/Users/luyi/Desktop/tempEverything/jars/eclipselink-2.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/luyi/Desktop/tempEverything/jars/eclipselink-2.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/luyi/Desktop/tempEverything/jars/javax.persistence-2.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/luyi/Desktop/tempEverything/jars/javax.persistence-2.0.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/luyi/Desktop/tempEverything/jars/jaxen.jar"/>
+	<classpathentry kind="lib" path="C:/Users/luyi/Desktop/tempEverything/jars/junit-4.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/luyi/Desktop/tempEverything/jars/mysql-connector-java-5.1.21-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/luyi/Desktop/tempEverything/jars/xunit/httpunit.jar"/>
+	<classpathentry kind="lib" path="C:/Users/luyi/Desktop/tempEverything/jars/xunit/js.jar"/>
+	<classpathentry kind="lib" path="C:/Users/luyi/Desktop/tempEverything/jars/xunit/nekohtml.jar"/>
+	<classpathentry kind="lib" path="C:/Users/luyi/Desktop/tempEverything/jars/xunit/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="C:/Users/luyi/Desktop/tempEverything/jars/xunit/xmlParserAPIs.jar"/>
+	<classpathentry kind="lib" path="D:/Program Files/glassfish-4.1.1/glassfish/lib/gf-client.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

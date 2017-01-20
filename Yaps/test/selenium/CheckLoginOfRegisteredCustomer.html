@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>CheckValidCostumer</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">CheckValidCostumer</td></tr>
+</thead><tbody>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Sign on</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=customerId</td>
+	<td>bill000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password</td>
+	<td>bill000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Account</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>customerProfile.1.1</td>
+	<td>Bill</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>customerProfile.2.1</td>
+	<td>Gates</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>customerProfile.3.1</td>
+	<td>bill.gates@microsoft.com</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>customerProfile.4.1</td>
+	<td>654 046 12</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>customerProfile.6.1</td>
+	<td>27 West Side</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>customerProfile.7.1</td>
+	<td>Story</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>customerProfile.8.1</td>
+	<td>Alhabama</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>customerProfile.9.1</td>
+	<td>Texas</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>customerProfile.10.1</td>
+	<td>8401</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>customerProfile.11.1</td>
+	<td>USA</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>customerProfile.13.1</td>
+	<td>Visa</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>customerProfile.14.1</td>
+	<td>1231 4564 2222</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>customerProfile.15.1</td>
+	<td>02/18</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit Your Account Information</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>name=firstname</td>
+	<td>Bill</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>name=lastname</td>
+	<td>Gates</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>name=email</td>
+	<td>bill.gates@microsoft.com</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>name=telephone</td>
+	<td>654 046 12</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>name=street1</td>
+	<td>27 West Side</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>name=street2</td>
+	<td>Story</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>name=city</td>
+	<td>Alhabama</td>
+</tr>
+<tr>
+	<td>verifySelectedValue</td>
+	<td>name=state</td>
+	<td>Texas</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>name=zipcode</td>
+	<td>8401</td>
+</tr>
+<tr>
+	<td>verifySelectedValue</td>
+	<td>name=country</td>
+	<td>USA</td>
+</tr>
+<tr>
+	<td>verifySelectedValue</td>
+	<td>name=creditCardType</td>
+	<td>Visa</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>name=creditCardNumber</td>
+	<td>1231 4564 2222</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>name=creditCardExpiryDate</td>
+	<td>02/18</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=city</td>
+	<td>Los Angeles</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=zipcode</td>
+	<td>8400</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=telephone</td>
+	<td>654 561 54</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=Submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Account</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>customerProfile.8.1</td>
+	<td>Los Angeles</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>customerProfile.10.1</td>
+	<td>8400</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>customerProfile.4.1</td>
+	<td>654 561 54</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit Your Account Information</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=city</td>
+	<td>Alhabama</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=zipcode</td>
+	<td>8401</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=telephone</td>
+	<td>654 046 12</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=Submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Sign off</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You are signed out.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<?xmlversion="1.0" encoding="utf-8"?>
+<jnlp spec="1.0+" codebase="http://localhost:8080/adminps" href="admin.jnlp">
+    <information>
+        <title>Admin YAPS Petstore </title>
+        <vendor>PetStore</vendor>
+        <description>Admin YAPS Petstore Console</description>
+        <icon href="http://localhost:8080/adminps/logo.gif"/>
+        <icon kind="splash" href="http://localhost:8080/adminps/logo.gif"/>
+    </information>
+    <security>
+        <all-permissions/>
+    </security>
+    <resources>
+        <j2se version="1.6"/>
+        <jar href="signed-client.jar"/>
+        <jar href="signed-common.jar"/>
+        <jar href="signed-services-ejb-client.jar"/>
+        <jar href="gf-client.jar"/>
+    </resources>
+    <application-desc main-class="com.yaps.petstore.client.ui.Menu"/>
+</jnlp>

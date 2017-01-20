@@ -1,0 +1,624 @@
+<?xml version="1.0"?>
+<project name="Yaps Petstore" default="core">
+
+    <property name="application.name" value="petstore"/>
+    <property name="tp" value="12"/>
+    <!-- =================================================================== -->
+    <!-- Variables                                                           -->
+    <!-- =================================================================== -->
+    <property name="home.dir" value="."/>
+
+    <property name="lib.dir" value="../jars"/>
+    <property name="temp.dir" value="${home.dir}/temp"/>
+	
+    <!--YAPS Properties-->
+    <property name="yaps.home" value="${home.dir}/Yaps"/>
+    <property name="yaps.config.dir" value="${yaps.home}/src/config"/>
+    <property name="yaps.src.dir" value="${yaps.home}/src/java"/>
+    <property name="yaps.test.src.dir" value="${yaps.home}/test/src"/>
+    <property name="yaps.classes.dir" value="${yaps.home}/classes/production"/>
+    <property name="yaps.test.classes.dir" value="${yaps.home}/classes/test"/>
+    <property name="yaps.build.dir" value="${yaps.home}/build"/>
+    <property name="yaps.web.dir" value="${yaps.home}/web"/>
+    <property name="yaps.web-inf.dir" value="${yaps.home}/web/WEB-INF"/>
+
+    <property name="yaps.deploy.dir" value="${yaps.config.dir}/deploy"/>
+
+    <!--BarkBank Properties-->
+    <property name="barkbank.home" value="${home.dir}/BarkBank"/>
+    <property name="barkbank.config.dir" value="${barkbank.home}/src/config"/>
+    <property name="barkbank.src.dir" value="${barkbank.home}/src/java"/>
+    <property name="barkbank.classes.dir" value="${barkbank.home}/classes/production"/>
+    <property name="barkbank.build.dir" value="${barkbank.home}/build"/>
+    <property name="barkbank.web.dir" value="${barkbank.home}/web"/>
+    <property name="barkbank.web-inf.dir" value="${barkbank.home}/web/WEB-INF"/>
+
+    <property name="barkbank.deploy.dir" value="${barkbank.config.dir}/deploy"/>
+
+    <!--adminps Properties-->
+    <property name="adminps.home" value="${home.dir}/adminps"/>
+    <property name="adminps.classes.dir" value="${adminps.home}/classes/production"/>
+    <property name="adminps.build.dir" value="${adminps.home}/build"/>
+    <property name="adminps.web.dir" value="${adminps.home}/resources"/>
+    <property name="adminps.web-inf.dir" value="${adminps.home}/WEB-INF"/>
+
+    <property name="adminps.deploy.dir" value="${adminps.config.dir}/deploy"/>
+
+	<!--Database properties-->
+    <property name="db.host" value="localhost"/>
+    <property name="db.sid" value="${application.name}DB12"/>
+    <property name="db.user" value="root"/>
+    <property name="db.password" value=""/>
+    <property name="db.port" value="3306"/>
+    <property name="db.driver" value="com.mysql.jdbc.Driver"/>
+    <property name="db.url" value="jdbc:mysql://${db.host}:${db.port}/${db.sid}"/>
+
+    
+    <!-- =================================================================== -->
+    <!-- Fichiers jar, war, ...                                              -->
+    <!-- =================================================================== -->
+    <property name="test.jar" value="${yaps.home}/test${tp}.jar"/>
+    <property name="yaps.common.jar" value="${yaps.build.dir}/common.jar"/>
+    <property name="yaps.client.jar" value="${yaps.build.dir}/client.jar"/>
+    <property name="yaps.server.jar" value="${yaps.build.dir}/server.jar"/>
+    <property name="yaps.web.war" value="${yaps.build.dir}/yapswtp12.war"/>
+
+    <property name="service.ejb.client.jar" value="${yaps.build.dir}/services-ejb-client.jar"/>
+
+	<!-- EJB Jars -->
+    <property name="service.ejb.jar" value="${yaps.build.dir}/services-ejb.jar"/>
+	<property name="cart.ejb.jar" value="${yaps.build.dir}/cart-ejb.jar"/>
+
+    <!-- Ear -->
+    <property name="petstore.ear" value="${yaps.build.dir}/yapswtp12.ear"/>
+
+	<property name="barkbank.web.war" value="${barkbank.build.dir}/barkbank.war"/>
+
+	<property name="adminps.web.war" value="${adminps.build.dir}/adminps.war"/>
+    <!-- Signed -->
+    <property name="sign.alias" value="adminAlias"/>
+    <property name="sign.pass" value="adminPassword"/>
+    <property name="sign.keystore" value="${adminps.build.dir}/keystore"/>
+    <property name="signed.client.jar" value="signed-client.jar"/>
+    <property name="signed.common.jar" value="signed-common.jar"/>
+    <property name="signed.ejb.client.jar" value="signed-services-ejb-client.jar"/>
+
+    <!-- =================================================================== -->
+    <!-- Utilitaires                                                         -->
+    <!-- =================================================================== -->
+    <property environment="env"/>
+    <property name="junit.jar" value="${lib.dir}/junit-4.4.jar"/>
+
+    <property name="glassfish.home" value="${env.GLASSFISH_HOME}"/>
+    <property name="mysql.jar.name" value="mysql-connector-java-5.1.21-bin.jar"/>
+    <property name="mysql.jar" value="${lib.dir}/${mysql.jar.name}"/>
+
+    <property name="servlet-api.jar" value="${glassfish.home}/modules/javax.servlet-api.jar"/>
+    <property name="jsp-api.jar" value="${glassfish.home}/modules/javax.servlet.jsp-api.jar"/>
+    <property name="ejb-api.jar" value="${glassfish.home}/modules/javax.ejb-api.jar"/>
+    <property name="jms-api.jar" value="${glassfish.home}/modules/javax.jms-api.jar"/>
+    <property name="transaction-api.jar" value="${glassfish.home}/modules/javax.transaction-api.jar"/>
+    <property name="naming-api.jar" value="${glassfish.home}/modules/glassfish-naming.jar"/>
+
+    <property name="glassfish-client.jar" value="${glassfish.home}/lib/gf-client.jar"/>
+
+    <property name="glassfish.deploy.dir" value="${glassfish.home}/domains/domain1/autodeploy"/>  <!--TODO use asadmin? -->
+
+    <property name="httpunit.jar" value="${lib.dir}/xunit/httpunit.jar"/>
+    <property name="js.jar" value="${lib.dir}/xunit/js.jar"/>
+    <property name="nekohtml.jar" value="${lib.dir}/xunit/nekohtml.jar"/>
+    <property name="xercesImpl.jar" value="${lib.dir}/xunit/xercesImpl.jar"/>
+    <property name="xmlParserAPIs.jar" value="${lib.dir}/xunit/xmlParserAPIs.jar"/>
+
+    <property name="dom4j.jar" value="${lib.dir}/dom4j.jar"/>
+    <property name="jaxen.jar" value="${lib.dir}/jaxen.jar"/>
+
+    <!-- =================================================================== -->
+    <!-- Check variable                                                      -->
+    <!-- =================================================================== -->
+    <target name="check" depends="checkenv, checkglassfish">
+    </target>
+
+	<target name="checkenv">
+        <fail unless="env.GLASSFISH_HOME">
+            ####
+            #### You must install GLASSFISH 4
+            #### And set the GLASSFISH_HOME variable
+        </fail>
+    	<available file="${mysql.jar}" property="isMySQLAvailable"/>
+        <fail unless="isMySQLAvailable">
+            ####
+            #### ${mysql.jar} not found
+        </fail>
+    	<available file="${httpunit.jar}" property="isHttpUnitAvailable"/>
+        <fail unless="isHttpUnitAvailable">
+            ####
+            #### ${httpunit.jar} not found
+        </fail>
+    	<available file="${dom4j.jar}" property="isDom4jAvailable"/>
+        <fail unless="isDom4jAvailable">
+            ####
+            #### ${dom4j.jar} not found
+        </fail>
+    </target>
+
+    <target name="checkglassfish">
+    	<available file="${glassfish.home}/domains/domain1/lib/ext/${mysql.jar.name}" property="isMySQLInstalled"/>
+        <fail unless="isMySQLInstalled">
+            ####
+            #### You should copy ${mysql.jar.name} in ${glassfish.home}/domains/domain1/lib/ext
+        </fail>
+    </target>
+
+    <!-- =================================================================== -->
+    <!-- Classes et Jars utiliser pour compiler et tester l'application      -->
+    <!-- =================================================================== -->
+    <path id="classpath">
+        <pathelement location="${junit.jar}"/>
+        <pathelement location="${mysql.jar}"/>
+        <!-- glassfish jars -->
+        <pathelement location="${servlet-api.jar}"/>
+        <pathelement location="${jsp-api.jar}"/>
+        <pathelement location="${ejb-api.jar}"/>
+        <pathelement location="${jms-api.jar}"/>
+        <pathelement location="${transaction-api.jar}"/>
+    	<pathelement location="${naming-api.jar}"/> 	
+    	
+        <!-- dom4j jars -->
+        <pathelement location="${dom4j.jar}"/>
+        <pathelement location="${jaxen.jar}"/>
+        <!-- httpunit jars -->
+        <pathelement location="${httpunit.jar}"/>
+        <pathelement location="${js.jar}"/>
+        <pathelement location="${nekohtml.jar}"/>
+        <pathelement location="${xercesImpl.jar}"/>
+        <pathelement location="${xmlParserAPIs.jar}"/>
+    </path>
+
+    <path id="yaps-classpath">
+        <pathelement location="${yaps.classes.dir}"/>
+        <pathelement location="${yaps.test.classes.dir}"/>
+        <pathelement location="${glassfish-client.jar}"/>
+    	<pathelement location="${yaps.config.dir}/jndi"/>
+    </path>
+
+    <path id="mintest_classpath">
+        <pathelement location="${junit.jar}"/>
+        <pathelement location="${mysql.jar}"/>
+        <pathelement location="${lib.dir}/javax.persistence-2.0.3.jar"/>
+        <pathelement location="${lib.dir}/eclipselink-2.2.1.jar"/>
+    </path>
+
+    <path id="barkbank-classpath">
+        <pathelement location="${barkbank.classes.dir}"/>
+    </path>
+
+    <!-- =================================================================== -->
+    <!-- Base de donnees                                                     -->
+    <!-- =================================================================== -->
+    <target name="yaps-create-db">
+        <sql src="${yaps.config.dir}/structure.sql"
+            driver="${db.driver}"
+            url="${db.url}"
+            userid="${db.user}"
+            password="${db.password}">
+            <classpath refid="classpath"/>
+        </sql>
+    </target>
+
+    <target name="yaps-insert-data">
+        <sql src="${yaps.config.dir}/data.sql"
+            driver="${db.driver}"
+            url="${db.url}"
+            userid="${db.user}"
+            password="${db.password}">
+            <classpath refid="classpath"/>
+        </sql>
+    </target>
+
+
+    <!-- =================================================================== -->
+    <!-- Suppression des repertoires de travail                              -->
+    <!-- =================================================================== -->
+    <target name="clean">
+        <antcall target="yaps-clean"/>
+        <antcall target="barkbank-clean"/>
+        <antcall target="adminps-clean"/>
+    </target>
+
+    <target name="yaps-clean">
+        <echo message="Cleans the Yaps environment"/>
+        <delete dir="${yaps.home}/classes"/>
+        <delete dir="${yaps.build.dir}"/>
+    </target>
+
+    <target name="barkbank-clean">
+        <echo message="Cleans the BarkBank environment"/>
+        <delete dir="${barkbank.home}/classes"/>
+        <delete dir="${barkbank.build.dir}"/>
+    </target>
+
+    <target name="adminps-clean">
+        <echo message="Cleans the adminps environment"/>
+        <delete dir="${adminps.build.dir}"/>
+    </target>
+
+    <!-- =================================================================== -->
+    <!-- Creation des repertoires de travail                                 -->
+    <!-- =================================================================== -->
+    <target name="yaps-prepare" depends="check">
+        <echo message="Setup the Yaps environment"/>
+        <mkdir dir="${yaps.classes.dir}"/>
+        <mkdir dir="${yaps.test.classes.dir}"/>
+        <mkdir dir="${yaps.build.dir}"/>
+    </target>
+
+    <target name="barkbank-prepare" depends="check">
+        <echo message="Setup the BarkBank environment"/>
+        <mkdir dir="${barkbank.classes.dir}"/>
+        <mkdir dir="${barkbank.build.dir}"/>
+    </target>
+
+
+    <!-- =================================================================== -->
+    <!-- Compile le code source                                              -->
+    <!-- =================================================================== -->
+    <target name="compile" >
+        <antcall target="yaps-compile"/>
+        <antcall target="barkbank-compile"/>
+    </target>
+
+    <target name="yaps-compile" depends="yaps-prepare">
+        <echo message="Compile the YAPS classes"/>
+        <javac srcdir="${yaps.src.dir}"
+               destdir="${yaps.classes.dir}"
+               deprecation="on" nowarn="on">
+            <compilerarg value="-Xlint:unchecked"/>
+            <classpath refid="classpath"/>
+            <classpath refid="yaps-classpath"/>
+        </javac>
+        <echo message="Compile the YAPS test classes"/>
+        <javac srcdir="${yaps.test.src.dir}"
+               destdir="${yaps.test.classes.dir}"
+               deprecation="on">
+            <classpath refid="classpath"/>
+            <classpath refid="yaps-classpath"/>
+        </javac>
+    </target>
+
+    <!-- compile Bark Bank app -->
+    <target name="barkbank-compile" depends="barkbank-prepare">
+        <echo message="Compile the YAPS classes"/>
+        <javac srcdir="${barkbank.src.dir}"
+               destdir="${barkbank.classes.dir}"
+               deprecation="on" nowarn="on">
+            <compilerarg value="-Xlint:unchecked"/>
+            <classpath refid="classpath"/>
+            <classpath refid="barkbank-classpath"/>
+        </javac>
+    </target>
+    <!-- =================================================================== -->
+    <!-- Package les fichiers dans des archives                              -->
+    <!-- =================================================================== -->
+    <target name="build" depends="compile">
+        <antcall target="yaps-build"/>
+        <antcall target="barkbank-build"/>
+        <antcall target="adminps-build"/>
+    </target>
+
+    <target name="barkbank-build" depends="barkbank-compile,barkbank-war"/>
+    <target name="yaps-build" depends="yaps-compile,yaps-build-common-jar,yaps-build-client-jar,yaps-build-server-jar,yaps-war"/>
+    <target name="adminps-build" depends="yaps-build-common-jar,yaps-build-client-jar,adminps-war"/>
+
+    <target name="yaps-build-common-jar">
+        <echo message="Creates the PetStore Customer jar"/>
+        <jar jarfile="${yaps.common.jar}">
+            <fileset dir="${yaps.classes.dir}">
+                <include name="com/yaps/petstore/common/**/*.class"/>
+            </fileset>
+        </jar>
+    </target>
+
+    <target name="yaps-build-client-jar">
+        <echo message="Creates the PetStore Client Application"/>
+        <jar jarfile="${yaps.client.jar}">
+            <fileset dir="${yaps.classes.dir}">
+                <include name="com/yaps/petstore/client/**/*.class"/>
+            </fileset>
+            <fileset dir="${yaps.config.dir}">
+            	<!-- <include name="jndi.properties"/> -->
+                <include name="glassfish-ejb-client.properties"/>
+            </fileset>
+        </jar>
+    </target>
+    <target name="yaps-build-server-jar">
+        <echo message="Creates the PetStore Server Application"/>
+        <mkdir dir="${temp.dir}/META-INF"/>
+        <copy todir="${temp.dir}">
+            <fileset dir="${yaps.classes.dir}">
+                <include name="com/yaps/petstore/server/**/*.class"/>
+                <exclude name="com/yaps/petstore/server/service/**/*.class"/>
+                <exclude name="com/yaps/petstore/server/cart/*.class"/>
+            </fileset>
+        </copy>
+    	<copy file="${yaps.src.dir}/META-INF/persistence.xml" todir="${temp.dir}/META-INF"/>
+        <jar jarfile="${yaps.server.jar}" basedir="${temp.dir}"/>
+        <delete dir="${temp.dir}"/>
+    </target>
+
+    <!-- Creates the Service EJB jar files -->
+    <target name="jarService" depends="compile">
+        <mkdir dir="${yaps.build.dir}"/>
+        <echo message="Creates the Service EJB Jar"/>
+        <mkdir dir="${temp.dir}/META-INF"/>
+        <copy todir="${temp.dir}">
+            <fileset dir="${yaps.classes.dir}">
+                <include name="com/yaps/petstore/server/service/**/*.class"/>
+            </fileset>
+        </copy>
+        <jar jarfile="${service.ejb.jar}" basedir="${temp.dir}"/>
+        <delete dir="${temp.dir}"/>
+
+        <echo message="Creates the Jar (required by client) containing the interfaces of EJB Services"/>
+        <jar jarfile="${service.ejb.client.jar}">
+            <fileset dir="${yaps.classes.dir}">
+                <include name="com/yaps/petstore/server/service/catalog/*.class"/>
+                <exclude name="com/yaps/petstore/server/service/catalog/*Bean.class"/>
+                <include name="com/yaps/petstore/server/service/customer/*.class"/>
+                <exclude name="com/yaps/petstore/server/service/customer/*Bean.class"/>
+                <include name="com/yaps/petstore/server/service/order/*.class"/>
+                <exclude name="com/yaps/petstore/server/service/order/*Bean.class"/>
+            </fileset>
+        </jar>
+    </target>
+
+    <!-- Creates the Cart EJB jar files -->
+    <target name="jarCart" depends="compile">
+        <mkdir dir="${yaps.build.dir}"/>
+        <echo message="Creates the Cart EJB Jar"/>
+        <mkdir dir="${temp.dir}/META-INF"/>
+        <copy todir="${temp.dir}">
+            <fileset dir="${yaps.classes.dir}">
+                <include name="com/yaps/petstore/server/cart/**/*.class"/>
+            </fileset>
+        </copy>
+        <jar jarfile="${cart.ejb.jar}" basedir="${temp.dir}"/>
+        <delete dir="${temp.dir}"/>
+    </target>
+
+
+	<!-- Creates the YAPS webapp war file (put all in the war file : problem on deployement of ear file in Glassfish) -->
+    <target name="yaps-war" depends="yaps-compile,jarService,jarCart,yaps-build-common-jar,yaps-build-server-jar">
+        <mkdir dir="${yaps.build.dir}"/>
+        <echo message="Creates the PetStore Web Application"/>
+        <war destfile="${yaps.web.war}" webxml="${yaps.web-inf.dir}/web.xml">
+            <fileset dir="${yaps.web.dir}">
+                <include name="**/*.html"/>
+                <include name="**/*.jsp"/>
+                <include name="**/*.gif"/>
+                <include name="**/*.jpg"/>
+                <include name="**/*.css"/>
+            </fileset>
+            <webinf dir="${yaps.web-inf.dir}">
+                <include name="petstore.tld"/>
+                <include name="glassfish-resources.xml"/>
+            </webinf>
+            <classes dir="${yaps.classes.dir}">
+                <include name="com/yaps/petstore/web/**/*.class"/>
+            </classes>
+            <lib file="${yaps.common.jar}"/>
+            <lib file="${yaps.server.jar}"/>
+            <lib file="${service.ejb.jar}"/>
+            <lib file="${dom4j.jar}"/>
+            <lib file="${jaxen.jar}"/>
+            <lib file="${cart.ejb.jar}"/>
+            <!-- NO! <lib file="${mysql.jar}"/>  
+	       (${mysql.jar.name} should copy in ${glassfish.home}/domains/domain1/lib/ext) 
+            -->
+        </war>
+    </target>
+
+    <target name="yaps-old-war" depends="yaps-compile">
+        <mkdir dir="${yaps.build.dir}"/>
+        <echo message="Creates the PetStore Web Application"/>
+        <war destfile="${yaps.web.war}" webxml="${yaps.web-inf.dir}/web.xml">
+            <fileset dir="${yaps.web.dir}">
+                <include name="**/*.html"/>
+                <include name="**/*.jsp"/>
+                <include name="**/*.gif"/>
+                <include name="**/*.jpg"/>
+                <include name="**/*.css"/>
+            </fileset>
+            <webinf dir="${yaps.web-inf.dir}">
+                <include name="petstore.tld"/>
+            </webinf>
+            <classes dir="${yaps.classes.dir}">
+                <include name="com/yaps/petstore/web/**/*.class"/>
+            </classes>
+        </war>
+    </target>
+
+    <!-- Creates the EAR file (does not work : problem on deployement in Glassfish) -->
+    <target name="yaps-ear" depends="yaps-build,yaps-war,jarService,jarCart,yaps-build-common-jar,yaps-build-server-jar">
+        <mkdir dir="${yaps.build.dir}"/>
+        <ear destfile="${petstore.ear}" appxml="${yaps.config.dir}/application.xml">
+            <fileset file="${yaps.web.war}"/>
+            <fileset file="${yaps.common.jar}"/>
+            <fileset file="${yaps.server.jar}"/>
+            <fileset file="${service.ejb.jar}"/>
+            <fileset file="${dom4j.jar}"/>
+            <fileset file="${jaxen.jar}"/>
+            <fileset file="${cart.ejb.jar}"/>
+        </ear>
+    </target>
+
+
+    <!-- Creates the BarkBank webapp war file -->
+    <target name="barkbank-war" depends="barkbank-compile">
+        <mkdir dir="${barkbank.build.dir}"/>
+        <echo message="Creates the BarkBank Web Application"/>
+        <war destfile="${barkbank.web.war}" webxml="${barkbank.web-inf.dir}/web.xml">
+            <fileset dir="${barkbank.web.dir}">
+                <include name="**/*.html"/>
+                <include name="**/*.jsp"/>
+                <include name="**/*.gif"/>
+                <include name="**/*.jpg"/>
+                <include name="**/*.css"/>
+            </fileset>
+            <classes dir="${barkbank.classes.dir}">
+                <include name="com/barkbank/**/*.class"/>
+            </classes>
+        	<lib file="${dom4j.jar}" />
+        	<lib file="${jaxen.jar}" />
+        </war>
+    </target>
+
+    <!-- Creates the Admin webapp war file -->
+    <target name="adminps-war" depends="yaps-build-common-jar,yaps-build-client-jar,jarService">
+        <mkdir dir="${adminps.build.dir}"/>
+        <echo message="Sign the client Jar"/>
+        <delete file="${sign.keystore}"/>
+        <!-- Generates a key -->
+        <genkey alias="${sign.alias}"
+            storepass="${sign.pass}"
+            keystore="${sign.keystore}"
+            dname="CN=YAPS, OU=YAPS PetStore, O=YAPS PetStore, C=US"/>
+        <!-- Sign the jars with the generated key -->
+        <signjar jar="${yaps.client.jar}"
+            signedjar="${adminps.build.dir}/${signed.client.jar}"
+            storepass="${sign.pass}"
+            alias="${sign.alias}"
+            keystore="${sign.keystore}"/>
+        <signjar jar="${yaps.common.jar}"
+            signedjar="${adminps.build.dir}/${signed.common.jar}"
+            storepass="${sign.pass}"
+            alias="${sign.alias}"
+            keystore="${sign.keystore}"/>
+        <signjar jar="${service.ejb.client.jar}"
+           signedjar="${adminps.build.dir}/${signed.ejb.client.jar}"
+            storepass="${sign.pass}" alias="${sign.alias}"
+           keystore="${sign.keystore}"/>
+
+      <signjar destDir="${adminps.build.dir}"
+         alias="${sign.alias}" keystore="${sign.keystore}"
+         storepass="${sign.pass}"
+         preservelastmodified="true">
+        <path>
+         <fileset dir="${glassfish.home}/lib" includes="gf-client.jar" />
+        </path>
+        <flattenmapper />
+      </signjar>
+
+    	<echo message="Creates the Admin Web Application"/>
+        <war destfile="${adminps.web.war}" webxml="${adminps.web-inf.dir}/web.xml">
+            <fileset dir="${adminps.home}/">
+                <include name="**/*.html"/>
+                <include name="**/*.gif"/>
+                <include name="**/*.jnlp"/>
+            </fileset>
+            <fileset dir="${adminps.build.dir}">
+            <include name="*.jar"/>
+             </fileset>
+        </war>
+    </target>
+
+    <!-- =================================================================== -->
+    <!-- Deploy                                                                -->
+    <!-- =================================================================== -->
+    <target name="deploy">
+        <antcall target="barkbank-deploy"/>
+        <antcall target="yaps-deploy"/>
+        <antcall target="adminps-deploy"/>
+    </target>
+
+    <target name="yaps-deploy" depends="yaps-war">
+        <copy file="${yaps.web.war}" todir="${glassfish.deploy.dir}"/>
+    </target>
+    <target name="yaps-deploy-old" depends="yaps-ear">
+        <copy file="${petstore.ear}" todir="${glassfish.deploy.dir}"/>
+    </target>
+
+    <target name="barkbank-deploy" depends="barkbank-war">
+        <copy file="${barkbank.web.war}" todir="${glassfish.deploy.dir}"/>
+    </target>
+
+	<target name="adminps-deploy" depends="adminps-war">
+        <copy file="${adminps.web.war}" todir="${glassfish.deploy.dir}"/>
+    </target>
+	
+    <!-- =================================================================== -->
+    <!-- Run                                                                -->
+    <!-- =================================================================== -->
+    <target name="yaps-run-client" depends="yaps-build">
+        <echo message="Runs the application"/>
+        <java classname="com.yaps.petstore.client.ui.Menu" fork="yes">
+            <classpath location="${yaps.client.jar}"/>
+            <classpath location="${yaps.common.jar}"/>
+        	<classpath location="${service.ejb.client.jar}"/>
+        	<classpath location="${glassfish-client.jar}"/>
+        </java>
+    </target>
+
+    <!-- =================================================================== -->
+    <!-- Test                                                                -->
+    <!-- =================================================================== -->
+    <target name="test">
+        <antcall target="yaps-test"/>
+    </target>
+
+    <target name="yaps-test" depends="check, yaps-compile">
+        <echo message="Tests the application"/>
+    	<copy file="${yaps.test.src.dir}/META-INF/persistence.xml" todir="${yaps.test.classes.dir}/META-INF" overwrite="true" preservelastmodified="true"/>
+        <junit printsummary="on" fork="yes">
+            <classpath refid="classpath"/>
+            <classpath refid="yaps-classpath"/>
+            <formatter type="plain" usefile="false"/>
+            <test name="AllTests"/>
+        </junit>
+    </target>
+
+    <target name="yaps-domain-test" depends="check, yaps-compile">
+        <echo message="Tests the domain part of the application"/>
+    	<copy file="${yaps.test.src.dir}/META-INF/persistence.xml" todir="${yaps.test.classes.dir}/META-INF" overwrite="true" preservelastmodified="true"/>
+        <junit printsummary="on" fork="yes">
+            <classpath refid="mintest_classpath"/>
+            <classpath refid="yaps-classpath"/>
+            <formatter type="plain" usefile="false"/>
+            <test name="AllDomainTests"/>
+        </junit>
+    </target>
+
+    <!-- =================================================================== -->
+    <!-- Construction de l'archive des sources a remettte                    -->
+    <!-- =================================================================== -->
+    <target name="yaps_zip_src" depends="">
+        <zip destfile="tp${tp}src.zip">
+            <fileset dir=".">
+                <includesfile name="excludedStudentFiles.txt"/> 
+            </fileset>
+        </zip>
+    </target>
+
+    <!-- =================================================================== -->
+    <!-- Corriger                                                            -->
+    <!-- =================================================================== -->
+    <target name="yaps-mark" depends="yaps-compile, yaps_zip_src">
+        <echo message="Marks the application"/>
+        <!-- the jndi file should be there! 
+        <copy file="${yaps.config.dir}/jndi.properties" todir="${yaps.test.classes.dir}"/>
+           -->
+        <java classname="Tests" fork="yes">
+            <sysproperty key="fichierScenario" value="TP${tp}.test"/>
+            <classpath location="${test.jar}"/>
+            <classpath refid="classpath"/>
+            <classpath refid="yaps-classpath"/>
+        </java>
+    </target>
+
+
+    <!-- =================================================================== -->
+    <!-- Main                                                                -->
+    <!-- =================================================================== -->
+    <target name="core" depends="build"/>
+
+</project>

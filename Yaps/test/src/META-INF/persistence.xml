@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="petstorePU" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    	<class>com.yaps.petstore.server.domain.customer.Customer</class>
+    	<class>com.yaps.petstore.server.domain.Address</class>
+    	<class>com.yaps.petstore.server.domain.CreditCard</class>
+    	<class>com.yaps.petstore.server.domain.category.Category</class>
+    	<class>com.yaps.petstore.server.domain.product.Product</class>
+    	<class>com.yaps.petstore.server.domain.item.Item</class>
+    	<class>com.yaps.petstore.server.domain.order.Order</class>
+    	<class>com.yaps.petstore.server.domain.orderline.OrderLine</class>
+    	<class>com.yaps.petstore.server.util.uidgen.Counter</class>
+        <properties>
+            <property name="eclipselink.target-database" value="MYSQL"/>
+            <!--  <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>     -->
+            <property name="eclipselink.logging.level" value="INFO"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/petstoreDB12"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+        </properties>
+    </persistence-unit>
+</persistence>

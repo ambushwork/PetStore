@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+
+<project name="Hello PetStore" default="core" basedir=".">
+
+    <!-- =================================================================== -->
+    <!-- Variables                                                           -->
+    <!-- =================================================================== -->
+    <property name="home.dir" value="."/>
+    <property name="classes.dir" value="${home.dir}/classes"/>
+    <property name="src.dir" value="${home.dir}/src"/>
+    <property name="lib.dir" value="../../jars"/>
+    <property name="build.dir" value="${home.dir}/build"/>
+
+    <!-- =================================================================== -->
+    <!-- Utilitaires                                                         -->
+    <!-- =================================================================== -->
+    <property environment="env"/>
+    <property name="mysql.jar.name" value="mysql-connector-java-5.1.21-bin.jar"/>
+    <property name="mysql.jar" value="${lib.dir}/${mysql.jar.name}"/>
+
+	<!-- =================================================================== -->
+    <!-- Fichiers jar, war, ...                                              -->
+    <!-- =================================================================== -->
+    <property name="javaxpersistence.jar" value="${lib.dir}/javax.persistence-2.0.0.jar"/>
+    <property name="eclipselink.jar" value="${lib.dir}/eclipselink-2.0.0.jar"/>
+    <property name="run.jar" value="${build.dir}/run.jar"/>
+
+    <!-- =================================================================== -->
+    <!-- Classes et Jars utiliser pour compiler et tester l'application      -->
+    <!-- =================================================================== -->
+    <path id="classpath">
+        <pathelement location="${classes.dir}"/>
+        <pathelement location="${mysql.jar}"/>
+        <pathelement location="${javaxpersistence.jar}"/>
+        <pathelement location="${eclipselink.jar}"/>
+    </path>
+
+    <!-- =================================================================== -->
+    <!-- Suppression des repertoires de travail                              -->
+    <!-- =================================================================== -->
+    <target name="clean">
+        <echo message="Cleans the environment"/>
+        <delete dir="${build.dir}"/>
+        <delete dir="${classes.dir}"/>
+    </target>
+
+    <!-- =================================================================== -->
+    <!-- Check variable                                                      -->
+    <!-- =================================================================== -->
+    <target name="check">
+        <fail unless="env.GLASSFISH_HOME">
+            ####
+            #### Set the GLASSFISH_HOME variable
+        </fail>
+    </target>
+
+    <!-- =================================================================== -->
+    <!-- Creation des repertoires de travail                                 -->
+    <!-- =================================================================== -->
+    <target name="prepare" depends="check">
+        <echo message="Setup the Yaps environment"/>
+        <mkdir dir="${classes.dir}"/>
+        <mkdir dir="${classes.dir}/META-INF"/>
+    	<copy file="${src.dir}/META-INF/persistence.xml" todir="${classes.dir}/META-INF"/>
+        <mkdir dir="${build.dir}"/>
+    </target>
+
+    <!-- =================================================================== -->
+    <!-- Compile le code source                                              -->
+    <!-- =================================================================== -->
+    <target name="compile"  depends="prepare">
+        <echo message="Compiles java classes"/>
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="${src.dir}"
+            destdir="${classes.dir}">
+            <classpath refid="classpath"/>
+        </javac>
+    </target>
+
+    <!-- =================================================================== -->
+    <!-- Package les fichiers dans des archives                              -->
+    <!-- =================================================================== -->
+	<target name="jar" depends="prepare,compile">
+        <echo message="Creates a runnable jar"/>
+        <jar jarfile="${run.jar}">
+            <manifest>
+             	<attribute name="Main-Class" value="domain.Main"/>
+               	<attribute name="Class-Path" value=". ${javaxpersistence.jar} ${eclipselink.jar} ${mysql.jar}"/>
+            </manifest>
+            <fileset dir="${classes.dir}">
+                <include name="**/*.class"/>
+            </fileset>
+            <fileset dir="${src.dir}">
+                <include name="META-INF/persistence.xml"/>
+            </fileset>
+         </jar>
+    </target>
+
+	<!-- =================================================================== -->
+    <!-- Run                                                                -->
+    <!-- =================================================================== -->
+    <target name="run" depends="compile">
+        <echo message="Runs the application"/>
+        <java classname="domain.Main" fork="yes">
+            <classpath refid="classpath"/>
+        </java>
+    </target>
+
+    <target name="runjar" depends="compile,jar">
+        <echo message="Runs the application"/>
+        <java jar="${run.jar}" fork="yes">
+        </java>
+    </target>
+
+    <!-- Main targets -->
+    <target name="core" depends="compile"/>
+
+</project>

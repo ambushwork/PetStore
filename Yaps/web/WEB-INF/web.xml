@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+    <!-- Servlet Configuration -->
+    <servlet>
+        <servlet-name>CreateCustomer</servlet-name>
+        <servlet-class>com.yaps.petstore.web.servlet.CreateCustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateNewAccount</servlet-name>
+        <servlet-class>com.yaps.petstore.web.servlet.CreateNewAccountServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateCustomer</servlet-name>
+        <servlet-class>com.yaps.petstore.web.servlet.UpdateCustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FindItem</servlet-name>
+        <servlet-class>com.yaps.petstore.web.servlet.FindItemServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FindItems</servlet-name>
+        <servlet-class>com.yaps.petstore.web.servlet.FindItemsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchItems</servlet-name>
+        <servlet-class>com.yaps.petstore.web.servlet.SearchItemsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FindProducts</servlet-name>
+        <servlet-class>com.yaps.petstore.web.servlet.FindProductsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SignOn</servlet-name>
+        <servlet-class>com.yaps.petstore.web.servlet.SignOnServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SignOff</servlet-name>
+        <servlet-class>com.yaps.petstore.web.servlet.SignOffServlet</servlet-class>
+    </servlet>
+    <!-- Shopping Cart Servlet Configuration -->
+    <servlet>
+        <servlet-name>AddItemToCart</servlet-name>
+        <servlet-class>com.yaps.petstore.web.servlet.cart.AddItemToCartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveItemFromCart</servlet-name>
+        <servlet-class>com.yaps.petstore.web.servlet.cart.RemoveItemFromCartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateCart</servlet-name>
+        <servlet-class>com.yaps.petstore.web.servlet.cart.UpdateCartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewCart</servlet-name>
+        <servlet-class>com.yaps.petstore.web.servlet.cart.ViewCartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Checkout</servlet-name>
+        <servlet-class>com.yaps.petstore.web.servlet.cart.CheckoutServlet</servlet-class>
+    </servlet>
+
+    <!-- Servlet Mapping -->
+    <servlet-mapping>
+        <servlet-name>CreateCustomer</servlet-name>
+        <url-pattern>/createcustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateNewAccount</servlet-name>
+        <url-pattern>/createnewaccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCustomer</servlet-name>
+        <url-pattern>/updatecustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FindItem</servlet-name>
+        <url-pattern>/finditem</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FindItems</servlet-name>
+        <url-pattern>/finditems</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchItems</servlet-name>
+        <url-pattern>/searchitems</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FindProducts</servlet-name>
+        <url-pattern>/findproducts</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SignOn</servlet-name>
+        <url-pattern>/signon</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SignOff</servlet-name>
+        <url-pattern>/signoff</url-pattern>
+    </servlet-mapping>
+
+    <!-- Shopping Cart Servlet Mapping -->
+    <servlet-mapping>
+        <servlet-name>AddItemToCart</servlet-name>
+        <url-pattern>/addtocart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveItemFromCart</servlet-name>
+        <url-pattern>/removefromcart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCart</servlet-name>
+        <url-pattern>/updatecart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCart</servlet-name>
+        <url-pattern>/viewcart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Checkout</servlet-name>
+        <url-pattern>/checkout</url-pattern>
+    </servlet-mapping>
+
+    <!-- Error Page -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/notfound.jsp</location>
+    </error-page>
+
+    <!-- Welcome Page -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+</web-app>

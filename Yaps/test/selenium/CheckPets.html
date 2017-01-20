@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>CheckPets</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">CheckPets</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/yapswtp12/index.jsp</td>
+	<td></td>
+</tr>
+<!--ChecklinksPets-->
+<tr>
+	<td>verifyHtmlSource</td>
+	<td>regexp:&lt;a href=&quot;/yapswtp12/findproducts\?categoryId=BIRDS&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyHtmlSource</td>
+	<td>regexp:&lt;a href=&quot;/yapswtp12/findproducts\?categoryId=CATS&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertHtmlSource</td>
+	<td>regexp:&lt;a href=&quot;/yapswtp12/findproducts\?categoryId=DOGS&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyHtmlSource</td>
+	<td>regexp:&lt;a href=&quot;/yapswtp12/findproducts\?categoryId=FISH&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyHtmlSource</td>
+	<td>regexp:&lt;a href=&quot;/yapswtp12/findproducts\?categoryId=REPTILES&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Dogs</td>
+	<td></td>
+</tr>
+<!--Checklinksraces-->
+<tr>
+	<td>verifyHtmlSource</td>
+	<td>regexp:&lt;a href=&quot;/yapswtp12/finditems\?productId=K9BD01&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertHtmlSource</td>
+	<td>regexp:&lt;a href=&quot;/yapswtp12/finditems\?productId=K9CW01&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyHtmlSource</td>
+	<td>regexp:&lt;a href=&quot;/yapswtp12/finditems\?productId=K9DL01&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyHtmlSource</td>
+	<td>regexp:&lt;a href=&quot;/yapswtp12/finditems\?productId=K9PO02&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyHtmlSource</td>
+	<td>regexp:&lt;a href=&quot;/yapswtp12/finditems\?productId=K9RT01&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyHtmlSource</td>
+	<td>regexp:&lt;a href=&quot;/yapswtp12/finditems\?productId=K9RT02&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Chihuahua</td>
+	<td></td>
+</tr>
+<!--CheckItems-->
+<tr>
+	<td>assertHtmlSource</td>
+	<td>regexp:&lt;a href=&quot;/yapswtp12/finditem\?itemId=EST19&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyHtmlSource</td>
+	<td>regexp:&lt;a href=&quot;/yapswtp12/finditem\?itemId=EST20&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//a[contains(text(),'Female Adult')])[2]</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

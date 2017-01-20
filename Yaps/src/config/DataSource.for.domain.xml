@@ -1,0 +1,17 @@
+<!-- To add in  <resources>  -->
+
+    <jdbc-connection-pool connection-validation-method="auto-commit" datasource-classname="com.mysql.jdbc.jdbc2.optional.MysqlDataSource" wrap-jdbc-objects="false" res-type="javax.sql.DataSource" name="mysql_petstoredb12_rootPool">
+      <property name="URL" value="jdbc:mysql://localhost:3306/petstoreDB12?zeroDateTimeBehavior=convertToNull"></property>
+      <property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+      <property name="Password" value=""></property>
+      <property name="portNumber" value="3306"></property>
+      <property name="databaseName" value="petstoredb12"></property>
+      <property name="User" value="root"></property>
+      <property name="serverName" value="localhost"></property>
+    </jdbc-connection-pool>
+    <jdbc-resource pool-name="mysql_petstoredb12_rootPool" jndi-name="jdbc/petstoreDS12"></jdbc-resource>
+
+<!-- To add in  <server>  -->
+
+      <resource-ref ref="jdbc/petstoreDS12"></resource-ref>
+
